@@ -16,9 +16,9 @@ def parse_agrs():
     parser = argparse.ArgumentParser()
 
     # Data input settings
-    parser.add_argument('--image_dir', type=str, default=r'E:\MKCL_usman\usman\R2Gen\data\iu_xray\images',
+    parser.add_argument('--image_dir', type=str, default='./data/iu_xray/images',
                         help='the path to the directory containing the data.')
-    parser.add_argument('--ann_path', type=str, default=r'E:\MKCL_usman\usman\R2Gen\data\iu_xray\annotation.json',
+    parser.add_argument('--ann_path', type=str, default='./data/iu_xray/annotation.json',
                         help='the path to the directory containing the data.')
 
     # Data loader settings
@@ -92,7 +92,7 @@ def parse_agrs():
     # Others
     parser.add_argument('--seed', type=int, default=9233, help='.')
     parser.add_argument('--resume', type=str, help='whether to resume the training from existing checkpoints.')
-    parser.add_argument('--load', type=str, default=r'E:\MKCL_usman\usman\R2Gen\results\iu_xray\model_best.pth', help='whether to load the pre-trained model.')
+    parser.add_argument('--load', type=str, default='./data/iu_xray\results\model_best.pth', help='whether to load the pre-trained model.')
     parser.add_argument('--num_classes', type=int, default=31)
     args = parser.parse_args()
     return args
@@ -114,25 +114,16 @@ def main():
     # create data loader
     test_dataloader = R2DataLoader(args, tokenizer, split='test', shuffle=False)
 
-    with open(r'E:\MKCL_usman\usman\R2Gen\data\auxillary_openi_matrix_30nodes.txt', 'r') as matrix_file:
-        adjacency_matrix = [[int(num) for num in line.split(',')] for line in matrix_file]  # 30个节点的辅助矩阵
-
-    fw_adj = torch.tensor(adjacency_matrix, dtype=torch.float).to('cuda:0')
-    identity_matrix = torch.eye(args.num_classes).to('cuda:0')
-    bw_adj = fw_adj.t().to('cuda:0')
-    fw_adj = fw_adj.add(identity_matrix).to('cuda:0')
-    bw_adj = bw_adj.add(identity_matrix).to('cuda:0')
-    # print(bw_adj)
+    
 
     # build model architecture
-    model = BaseCMNModel(args, tokenizer, args.num_classes, fw_adj, bw_adj)  # , fw_adj, bw_adj
+    model = SMAN(args, tokenizer)  
 
     # get function handles of loss and metrics
     criterion = compute_loss
     metrics = compute_scores
-    criterion_c = SupConLoss(temperature=0.07)  # 0.05 0.07 0.1
     # build trainer and start to train
-    tester = Tester(model, fw_adj, bw_adj, criterion, criterion_c, metrics, args, test_dataloader)
+    tester = Tester(model, criterion, criterion_c, metrics, args, test_dataloader)
     tester.test()
 
 
