@@ -1,7 +1,7 @@
 # SMAN: Spatial-Channel Feature Enhancement with Multimodal Auxiliary Decoding Network for Radiology Report Generation
 
 [![Conference](https://img.shields.io/badge/IEEE%20BIBM-2026-blue)](https://ieeebibm.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.10%2B-ee4c2c)](https://pytorch.org/)
 <!--
