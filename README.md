@@ -23,7 +23,8 @@ Official PyTorch implementation of **SMAN**, accepted at **IEEE BIBM 2026**.
 ##  Architecture
 
 <p align="center">
-  <img src="assets/SMANoverallarch.png" width="95%" alt="SMAN overall architecture">
+  <img width="1253" height="586" alt="image" src="https://github.com/user-attachments/assets/35e9cdfb-2414-4c41-86a8-174574d4ae21" />
+
 </p>
 
 A ResNet-101 backbone processes multi-view chest radiographs; **SCFE** refines patch-level features, and **CARE** adaptively fuses local and global visual representations before the main Transformer report generator. During training only, **M2Decoder** provides auxiliary cross-modal supervision (CMI → CARE → TSA), and **GFNR** constrains pooled global feature magnitudes via an ℓ₂ norm penalty — both discarded at inference, so deployment cost is unchanged.
@@ -37,7 +38,7 @@ A ResNet-101 backbone processes multi-view chest radiographs; **SCFE** refines p
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
 ```
 SMAN/
@@ -46,24 +47,23 @@ SMAN/
 │   ├── iu_xray/               # IU X-Ray images + annotation json
 │   └── mimic_cxr/             # MIMIC-CXR images + annotation json
 ├── models/
-│   ├── scfe.py                 # Spatial-Channel Feature Enhancer
-│   ├── care.py                  # Cross-Representation Alignment and Relational Encoder
-│   ├── m2decoder.py             # Auxiliary cross-modal decoding branch
-│   ├── gfnr.py                   # Global Feature-Norm Regularization
+│   
+│                    
+│   ├── m2decoder.py             # Auxiliary cross-modal decoding branch                  
 │   └── sman.py                   # Full SMAN model assembly
-├── scripts/
-│   ├── train.py
-│   ├── test.py
-│   └── preprocess.py
-├── assets/
-│   └── SMANoverallarch.png
+├── modules/
+  └── RVFE.py
+  └── ...
+  └── trainer.py
+├── maintrain.py
+├── test.py
+│
+
+│   
 ├── requirements.txt
 └── README.md
 ```
 
-> Adjust paths/filenames above to match your actual repo layout before publishing.
-
----
 
 ## ⚙️ Installation
 
@@ -97,23 +97,21 @@ python scripts/preprocess.py --dataset mimic_cxr --data_root data/mimic_cxr
 
 ---
 
-## 🚀 Usage
+##  Usage
 
 **Training**
 
 ```bash
 # IU X-Ray
-python scripts/train.py --config configs/sman_iu_xray.yml
+
 
 # MIMIC-CXR
-python scripts/train.py --config configs/sman_mimic_cxr.yml
+
 ```
 
 **Evaluation**
 
-```bash
-python scripts/test.py --config configs/sman_iu_xray.yml --checkpoint checkpoints/sman_iu_xray_best.pth
-```
+
 
 Key hyperparameters (see Section III of the paper): backbone learning rate `2×10⁻³` (StepLR, step=20, γ=0.5), other modules `7×10⁻⁴`, beam size `3` with trigram blocking, `λ_m2 = 5×10⁻⁵`, `λ_GFNR = 0.01`.
 
@@ -165,13 +163,10 @@ If you find this work useful, please cite:
 
 ---
 
-## 🙏 Acknowledgements
+##  Acknowledgements
 
 We thank the maintainers of **IU X-Ray** and **MIMIC-CXR** for making their datasets publicly available, and the authors of R2Gen, R2GenCMN, and related baselines whose open-source implementations supported our comparisons.
 
-## 📄 License
-
-This project is released under the [MIT License](LICENSE).
 
 ## 📬 Contact
 
