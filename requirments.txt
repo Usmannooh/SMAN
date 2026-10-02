@@ -1,0 +1,76 @@
+# requirements.txt
+
+===== Important Notes for Reproducibility =====
+
+Results Variation Disclaimer:
+Although we fix all random seeds, enforce deterministic CUDA settings, 
+and control DataLoader randomness, minor variations in results may still occur due to:
+
+1. Hardware differences (GPU architecture, CPU instruction sets).
+2. Non-deterministic GPU operations (e.g., attention and memory-related CUDA kernels).
+3. Floating-point accumulation and operation order differences across systems.
+4. Stochastic data augmentations during training (e.g., random cropping and flipping),
+   which are seed-controlled but may still exhibit hardware-dependent behavior.
+5. PyTorch / torchvision version differences, including minor (patch-level) updates.
+
+I strongly recommend reproducing results on the same hardware and software environment 
+for closest alignment with reported metrics.
+
+
+===== PYTHON & SYSTEM =====
+Python version: 3.9.21  [MSC v.1929 64 bit (AMD64)]
+OS: Windows-10-10.0.19045-SP0 with (RTX 3080 (10 GB) 
+Platform: AMD64
+Processor: Intel64 Family 6 Model 165 Stepping 3, GenuineIntel
+
+===== CUDA / GPU =====
+Torch CUDA available: True
+Torch version: 1.13.1+cu117
+Torchvision version: 0.14.1+cu117
+CUDA version (torch): 11.7
+cuDNN version: 8500
+GPU name: NVIDIA GeForce RTX 3080
+GPU capability: (8, 6)
+GPU memory: 10.73676288 GB
+
+===== INSTALLED PACKAGES  =====
+torch ==1.13.1+cu117
+torchvision==0.14.1+cu117
+torchaudio==0.13.1+cu117
+numpy==1.26.4
+scipy==1.13.1
+scikit-learn==1.6.1
+pandas==2.2.3
+opencv-pythonv==4.11.0.86
+pillow==11.1.0
+recordtyp==1.4
+matplotlib==3.9.4
+seaborn== 0.13.2
+tensorboard==2.19.0
+tensorflow==2.19.0
+tqdm== 4.67.1
+transformers==4.48.2
+nltk==3.9.1
+spacy==3.7.5
+NumPy==1.26.4
+SciPy==1.13.1
+scikit-learn==1.6.1
+Pandas==2.2.3
+OpenCV==4.11.0
+PIL==11.1.0
+timm==0.9.12
+pycocoevalcap==1.2
+pycocotools==2.0.10
+sentence-transformers==5.1.0
+utils==1.0.2
+
+Install JAVA env  For METEOR: sudo apt install default-jdk, sudo apt install default-jdk
+sudo apt update
+sudo apt install -y openjdk-11-jre-headless
+java -version
+
+===Instalation ENV====
+
+conda create -n gpupytorch python=3.9.21 -y
+conda activate gpupytorch
+pip install torch==1.13.1+cu117 torchaudio==0.13.1+cu117 torchvision==0.14.1+cu117 -f https://download.pytorch.org/whl/cu117/torch_stable.html
