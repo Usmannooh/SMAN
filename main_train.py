@@ -28,33 +28,33 @@ def parse_agrs():
     parser.add_argument('--ann_path', type=str, default='./data/iu_xray/annotation.json', help='the path to the directory containing the data.')
     parser.add_argument('--vocab_path', type=str, default='./data/New_vocab.pkl',help='Path to vocab file ')
     parser.add_argument('--embedding_path', type=str, default='./data/embedding/embeddings.txt', help='Path to text embeddings file ')
-    parser.add_argument('--num_classes', type=int, default=31, help='classe hen jo hen, as lye k wo waja he')
+    parser.add_argument('--num_classes', type=int, default=31, help='')
 
-    parser.add_argument('--save_dir', type=str, default='./records/HyperparameterAnalysis/WithoutL2Weigtage/0.01', help='the patch to save the models.')
-    parser.add_argument('--record_dir', type=str, default='./records/HyperparameterAnalysis/WithoutL2Weigtage/0.01',help='the patch to save the results of experiments.')
+    parser.add_argument('--save_dir', type=str, default='./records/', help='the patch to save the models.')
+    parser.add_argument('--record_dir', type=str, default='./records',help='the patch to save the results of experiments.')
 
     # mimic-cxr
     # parser.add_argument('--image_dir', type=str, default=r'E:\usman\DATA_SETS\data\mimic_cxr\images',  help='the path to the directory containing the data.')
     # parser.add_argument('--ann_path', type=str, default=r'E:\usman\DATA_SETS\data\mimic_cxr\annotation.json', help='the path to the directory containing the data.')
-    # parser.add_argument('--vocab-path', type=str, default=r'E:\usman\DATA_SETS\SMAN_IU_520\data\New_vocab.pkl')
+    # parser.add_argument('--vocab-path', type=str, default=r'E:\usman\DATA_SETS\ata\New_vocab.pkl')
     # Data loader settings
     parser.add_argument('--dataset_name', type=str, default='iu_xray', choices=['iu_xray', 'mimic_cxr'], help='the dataset to be used.')
     parser.add_argument('--threshold', type=int, default=1, help='the cut off frequency for the words.')
     parser.add_argument('--num_workers', type=int, default=0, help='the number of workers for dataloader.')
-    parser.add_argument('--batch_size', type=int, default=8, help='the number of samples for a batch')  # Batch Size
+    parser.add_argument('--batch_size', type=int, default=8, help='the number of samples for a batch') 
 
     # Multimodal Decoder
     parser.add_argument('--m2_max_seq_length', type=int, default=60,help='the maximum sequence length of the reports.maximum:100')
     parser.add_argument('--kd', type=int, default=768, help='Tag feature medical embeddings size')
     parser.add_argument('--ssl_loss_weight', type=float, default=0.01,  #0.01,0.03,0.05,0.07,0.1
                         help='weighting coefficient for auxiliary loss for  Relational Contrastive Learning(default: 0.01)')
-    parser.add_argument('--m2_decoder_weight', type=float, default=5e-5, help='weighting coefficient for M2Decoder loss (default: 0.05)') #5e-5
+    parser.add_argument('--m2_decoder_weight', type=float, default=5e-5, help='weighting coefficient for M2Decoder loss (default: 0.05)') 
     parser.add_argument('--m2_decoder_seq_len', type=int, default=4, help='Length of decoder input sequence')
     parser.add_argument('--m2_decoder_target_start', type=int, default=1,help='Start index for target tokens')
     # Multimodal Decoder Projections
-    parser.add_argument('--m2_proj_fc_in_dim', type=int, default=4096, help='Input dimension for m2_proj_fc linear layer (default: 4096)')
-    parser.add_argument('--m2_proj_att_in_dim', type=int, default=2048, help='Input dimension for m2_proj_att linear layer (default: 2048)')
-    parser.add_argument('--m2_proj_out_dim', type=int, default=768, help='Output dimension for m2_proj_fc/m2_proj_att linear layers (default: 768)')
+    parser.add_argument('--m2_proj_fc_in_dim', type=int, default=4096, help='Input dimension for m2_proj_fc linear layer ')
+    parser.add_argument('--m2_proj_att_in_dim', type=int, default=2048, help='Input dimension for m2_proj_att linear layer ')
+    parser.add_argument('--m2_proj_out_dim', type=int, default=768, help='Output dimension for m2_proj_fc/m2_proj_att linear layers')
     parser.add_argument('--max_seq_length', type=int, default=50, help='the maximum sequence length of the reports .')
     parser.add_argument('--fusion_strategy', type=str, default='concat_raw', choices=['concat_avg', 'average', 'concat_raw'], help='Multi-view feature fusion strategy')
 
@@ -93,8 +93,8 @@ def parse_agrs():
 
     # Trainer settings
     parser.add_argument('--n_gpu', type=int, default=1, help='the number of gpus to be used.')
-    parser.add_argument('--epochs', type=int, default=25, help='the number of training epochs.')  # EPOCHS
-    parser.add_argument('--early_stop', type=int, default=25, help='the patience of training.')
+    parser.add_argument('--epochs', type=int, default=100, help='the number of training epochs.') 
+    parser.add_argument('--early_stop', type=int, default=40, help='the patience of training.')
     parser.add_argument('--log_period', type=int, default=200, help='the logging interval (in batches).')
     parser.add_argument('--save_period', type=int, default=1, help='the saving period (in epochs).')
     parser.add_argument('--monitor_mode', type=str, default='max', choices=['min', 'max'], help='whether to max or min the metric.')
@@ -102,7 +102,7 @@ def parse_agrs():
 
     # Optimization
     parser.add_argument('--optim', type=str, default='Adam', help='the type of the optimizer.')
-    parser.add_argument('--lr_ve', type=float, default=0.002, help='the learning rate for the visual extractor.') #5e-5
+    parser.add_argument('--lr_ve', type=float, default=0.002, help='the learning rate for the visual extractor.') 
     parser.add_argument('--lr_ed', type=float, default=7e-4, help='the Transformer(text) learning rate for the remaining parameters.')
     parser.add_argument('--weight_decay', type=float, default=0.00005,  help='the weight decay.')
     parser.add_argument('--adam_betas', type=tuple, default=(0.9, 0.98),  help='betas for Adam optimizer (momentum and variance tracking).')
@@ -119,7 +119,7 @@ def parse_agrs():
     parser.add_argument('--gamma', type=float, default=0.5, help='the gamma of the learning rate scheduler.')
 
     # Others
-    parser.add_argument('--seed', type=int, default=7580, help='Set seed for reproducibility of results.')  # 9233,7533,7580
+    parser.add_argument('--seed', type=int, default=9233, help='Set seed for reproducibility of results.') 
     parser.add_argument('--resume', type=str, help='whether to resume the training from existing checkpoints.')
     #parser.add_argument('--resume', type=str, default= r'E:\usman\SMAN.pth', help='Path to resume the training from existing checkpoint.')
 
