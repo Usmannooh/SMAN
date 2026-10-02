@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.10%2B-ee4c2c)](https://pytorch.org/)
-
+<!--
 Official PyTorch implementation of **SMAN**, accepted at **IEEE BIBM 2026**.
 
 > **SMAN: Spatial-Channel Feature Enhancement with Multimodal Auxiliary Decoding Network for Radiology Report Generation**
@@ -20,7 +20,7 @@ Official PyTorch implementation of **SMAN**, accepted at **IEEE BIBM 2026**.
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 <p align="center">
   <img src="assets/SMANoverallarch.png" width="95%" alt="SMAN overall architecture">
@@ -28,7 +28,7 @@ Official PyTorch implementation of **SMAN**, accepted at **IEEE BIBM 2026**.
 
 A ResNet-101 backbone processes multi-view chest radiographs; **SCFE** refines patch-level features, and **CARE** adaptively fuses local and global visual representations before the main Transformer report generator. During training only, **M2Decoder** provides auxiliary cross-modal supervision (CMI → CARE → TSA), and **GFNR** constrains pooled global feature magnitudes via an ℓ₂ norm penalty — both discarded at inference, so deployment cost is unchanged.
 
-## ✨ Key Contributions
+##  Key Contributions
 
 - **SCFE** — jointly recalibrates channel-wise pathology responses and spatial localization cues inside the visual backbone, improving sensitivity to subtle chest X-ray abnormalities before global feature aggregation.
 - **CARE** — a shared, reusable gating module that adaptively fuses patch-level and study-level global visual representations for more informative report generation.
@@ -176,4 +176,4 @@ This project is released under the [MIT License](LICENSE).
 ## 📬 Contact
 
 For questions, please open a GitHub issue or email **zhangyijia@dlmu.edu.cn**.
-
+-->
